@@ -10,7 +10,7 @@ const globalProtocol = {
   SLOT_CONTENT_PROTOCOL: "SLOT_CONTENT_PROTOCOL",
 } as const;
 
-/** 插件对框架的协议，扩展了通用协议，并添加处理样式的协议。 */
+/** 插件对框架的协议。 */
 const pluginToTemplateProtocol = {
   ...globalProtocol,
   /** 处理样式协议，如：less、scss。 */
