@@ -50,13 +50,13 @@ function createDirAndWriteFile(filePath: string, content: string) {
 }
 
 /**
- * 创建项目文件夹。
+ * 检查项目文件夹
  * @async
- * @function createFolder
- * @param {string} rootDirectory - 根目录路径。
+ * @function checkFolder
+ * @param {string} rootDirectory - 根目标路径
  * @param {Record<string, any>} options - 选项对象。
  */
-async function createFolder(rootDirectory: string, options: Record<string, any>) {
+async function checkFolder(rootDirectory: string, options: Record<string, any>) {
   // 检查目录是否存在
   if (fs.existsSync(rootDirectory)) {
     let proceed = options.force; // 如果强制创建，则默认继续
@@ -69,15 +69,25 @@ async function createFolder(rootDirectory: string, options: Record<string, any>)
       });
     }
 
-    // 根据用户的选择或强制选项决定是否继续
-    if (proceed) {
-      removeDirectory(rootDirectory, false); // 删除已存在的目录
-    } else {
-      process.exit(1); // 用户选择不覆盖，退出程序
+    // 用户选择不覆盖，退出程序
+    if (!proceed) {
+      process.exit(1);
     }
   }
+}
 
-  // 如果之前已经删除或目录不存在，创建目录
+/**
+ * 创建项目文件夹。
+ * @function createFolder
+ * @param {string} rootDirectory - 根目录路径。
+ */
+function createFolder(rootDirectory: string) {
+  // 如果存在目标目录则删除
+  if (fs.existsSync(rootDirectory)) {
+    removeDirectory(rootDirectory, false); // 删除已存在的目录
+  }
+
+  // 创建目录
   fs.mkdirSync(rootDirectory, { recursive: true });
 }
 
@@ -95,7 +105,8 @@ export default async function createAppTest(projectName: string, options: Record
   // 获取到项目的根目录的绝对路径
   const rootDirectory = resolveApp(projectName);
 
-  await createFolder(rootDirectory, options);
+  // 检查目标文件夹
+  await checkFolder(rootDirectory, options);
 
   // 获取用户选择预设
   const preset: Preset = await projectSelect();
@@ -142,6 +153,9 @@ export default async function createAppTest(projectName: string, options: Record
       delete packageContent.devDependencies["babel"];
     }
   });
+
+  // 创建目标文件夹
+  createFolder(rootDirectory);
 
   const packageJson = new PackageAPI(rootDirectory);
   await packageJson.createPackageJson(packageContent);
