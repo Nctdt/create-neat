@@ -1,13 +1,14 @@
 import fs from "fs";
 import path from "path";
 
-const Protocols = require("../configs/protocol");
 import { Preset } from "../utils/preset";
 
 import Generator from "./Generator";
 import PluginToTemplateAPI from "./protocolGenerator/PluginToTemplateAPI";
 import TemplateToBuildToolAPI from "./protocolGenerator/TemplateToBuildToolAPI";
 import FileTree from "./FileTree";
+
+const Protocols = require("../configs/protocol");
 
 const { pluginToTemplateProtocol, pluginToBuildToolProtocol, templateToBuildToolProtocol } =
   Protocols;
