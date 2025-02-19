@@ -1,4 +1,3 @@
-const { resolveApp } = require("@laconic/utils");
 import chalk from "chalk";
 import ora from "ora";
 import fs, { readFileSync } from "fs-extra";
@@ -6,6 +5,8 @@ import { join } from "node:path";
 import { rmSync } from "node:fs";
 
 import { CLIENT_OS } from "./constants";
+
+const { resolveApp } = require("@laconic/utils");
 
 /**
  * @author moment

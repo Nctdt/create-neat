@@ -35,7 +35,11 @@ async function createFiles(dir: string, files: Record<string, string>): Promise<
         fs.writeFileSync(filePath, content);
       }),
     );
-    console.log(chalk.green(`\n✅  All files created successfully!`));
+
+    // 获取项目名称并截取对应项目名称的相对路径
+    const projectName = process.env.PROJECT_NAME;
+    const filesName = dir.slice(dir.indexOf(projectName)) + path.sep + Object.keys(files);
+    console.log(chalk`✅ {green ${filesName}} created successfully!`);
   } catch (error) {
     console.error(chalk.red("❌  Failed to create files:", error));
     throw error; // 重新抛出错误以允许调用者处理

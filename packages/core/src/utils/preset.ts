@@ -58,7 +58,7 @@ const getPreset = (
  * @constant {Preset} defaultPreset
  * @description 默认预设配置对象，包含常见配置的默认值。
  */
-const defaultPresetLib: Preset = {
+/* const defaultPresetLib: Preset = {
   template: "common-lib",
   buildTool: "webpack",
   plugins: {
@@ -69,7 +69,7 @@ const defaultPresetLib: Preset = {
   npmSource: "",
   // todo: 更多配置随构建需要添加
   extraConfigFiles: true,
-};
+}; */
 
 const defaultPresetVue: Preset = {
   template: "vue",
@@ -98,7 +98,7 @@ const defaultPresetReact: Preset = {
 };
 
 const defaultPreset = {
-  lib: defaultPresetLib,
+  // lib: defaultPresetLib,
   vue: defaultPresetVue,
   react: defaultPresetReact,
 };

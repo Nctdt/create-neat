@@ -1,4 +1,3 @@
-const { resolveApp } = require("@laconic/utils");
 import fs from "fs-extra";
 import { exec } from "child_process";
 import { confirm } from "@clack/prompts";
@@ -17,6 +16,8 @@ import createSuccessInfo from "./createSuccessInfo";
 import dependenciesInstall from "./dependenciesInstall";
 import { createReadmeString } from "./createFiles";
 import { buildToolConfigDevDependencies, buildToolScripts } from "./constants";
+
+const { resolveApp } = require("@laconic/utils");
 
 /**
  * 将输入模式设置为原始模式。
@@ -101,6 +102,7 @@ function createFolder(rootDirectory: string) {
 export default async function createAppTest(projectName: string, options: Record<string, any>) {
   // 记录开发环境并设置环境变量
   process.env.NODE_ENV = options.dev ? "DEV" : "PROD";
+  process.env.PROJECT_NAME = projectName;
 
   // 获取到项目的根目录的绝对路径
   const rootDirectory = resolveApp(projectName);
