@@ -8,14 +8,14 @@ const frameworkConfigs = {
   },
 };
 
-const pluginWebpackScript = (framework) => {
+const pluginWebpackScript = (framework: string) => {
   const configHandler = frameworkConfigs[framework];
 
   if (configHandler) {
     return configHandler();
   } else {
-    console.warn(`Unsupported build tool: ${buildTool}`);
+    console.warn(`Unsupported framework: ${framework}`);
   }
 };
 
-module.exports = pluginWebpackScript;
+export default pluginWebpackScript;

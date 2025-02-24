@@ -1,6 +1,6 @@
 import path from "path";
 
-import { FileData } from "../models/FileTree";
+import { FileData } from "../models/FileTree.js";
 
 /**
  * 根据给定的文件路径，从嵌套的文件结构中检索目标文件的数据。

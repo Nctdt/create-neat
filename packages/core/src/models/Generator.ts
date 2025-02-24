@@ -3,21 +3,23 @@ import generator from "@babel/generator";
 import fs from "fs-extra";
 import chalk from "chalk";
 import { parse } from "@babel/parser";
+import { pathToFileURL } from "url";
 
-import { relativePathToRoot } from "../utils/constants";
-import { createFiles } from "../utils/createFiles";
-import { createConfigByParseAst } from "../utils/ast/parseAst";
-import { Preset } from "../utils/preset";
-import { readTemplateFileContent } from "../utils/fileController";
-import generateBuildToolConfigFromEJS from "../utils/generateBuildToolConfigFromEJS";
-import { buildToolType } from "../types";
+import { CNRootDirectory, relativePathToRoot } from "../utils/constants.js";
+import { createFiles } from "../utils/createFiles.js";
+import { createConfigByParseAst } from "../utils/ast/parseAst.js";
+import { Preset } from "../utils/preset.js";
+import { readTemplateFileContent } from "../utils/fileController.js";
+import generateBuildToolConfigFromEJS from "../utils/generateBuildToolConfigFromEJS.js";
+import { buildToolType } from "../types/index.js";
 
-import GeneratorAPI from "./GeneratorAPI";
-import ConfigTransform from "./ConfigTransform";
-import TemplateAPI from "./TemplateAPI";
-import FileTree from "./FileTree";
-import BaseAPI from "./BaseAPI";
+import GeneratorAPI from "./GeneratorAPI.js";
+import ConfigTransform from "./ConfigTransform.js";
+import TemplateAPI from "./TemplateAPI.js";
+import FileTree from "./FileTree.js";
+import BaseAPI from "./BaseAPI.js";
 
+const __dirname = import.meta.dirname;
 interface ConfigFileData {
   file: Record<string, string[]>;
 }
@@ -101,17 +103,18 @@ const reservedConfigTransforms = {
  * @param {string} rootDirectory - 根目录路径。
  * @returns {Promise<any>} 返回一个 Promise 对象，该对象在成功时解析为加载的模块，失败时解析为 null。
  */
-async function loadModule(modulePath: string, rootDirectory: string) {
+async function loadModule(modulePath: string, rootDirectory: string = CNRootDirectory) {
   /**
    * 解析后的路径。
    * @type {string}
    */
   const resolvedPath = path.resolve(rootDirectory, modulePath);
+  const fileUrlPath = pathToFileURL(resolvedPath).href;
   try {
-    const module = await require(resolvedPath);
+    const module = await import(fileUrlPath);
     return module;
   } catch (error) {
-    console.error(`Error loading module at ${resolvedPath}:`, error);
+    console.error(`Error loading module at ${fileUrlPath}:`, error);
     return null;
   }
 }
@@ -167,7 +170,7 @@ class Generator {
     let baseGenerator: (api: BaseAPI, template?: string) => Promise<any>;
     if (process.env.NODE_ENV === "DEV") {
       const basePathInDev = pkgPath;
-      baseGenerator = await loadModule(basePathInDev, path.resolve(__dirname, relativePathToRoot));
+      baseGenerator = await loadModule(basePathInDev);
     } else if (process.env.NODE_ENV === "PROD") {
       if (modulePath !== "") {
         const basePathInProd = modulePath;
@@ -184,7 +187,7 @@ class Generator {
   // 最后将ast生成代码放到相关文件中插入到根目录
   async mergeBuildToolConfigByAst(entryPath: string) {
     // 执行 plugin或模板的入口文件，把 config 合并到构建工具原始配置中
-    const baseEntry = await loadModule(entryPath, path.resolve(__dirname, relativePathToRoot));
+    const baseEntry = await loadModule(entryPath);
 
     // 处理构建工具配置
     if (typeof baseEntry === "function") {
@@ -231,10 +234,9 @@ class Generator {
 
   // 单独处理一个框架相关依赖，主要是将框架相关的依赖包插入到pkg内，以及将需要的构建工具配置合并到构建工具模板中
   async templateGenerate() {
-    const templateGenerator = await this.loadBase(
-      `packages/core/template/template-${this.templateName}/generator/index.cjs`,
-      "",
-    );
+    const templatePath = `packages/core/dist/template/template-${this.templateName}/generator/index.js`;
+    console.log("templatePath: ", templatePath);
+    const templateGenerator = await this.loadBase(templatePath, "");
 
     if (templateGenerator && typeof templateGenerator === "function") {
       // 将框架需要的依赖加入到package.json中
@@ -245,7 +247,7 @@ class Generator {
   // 单独处理一个构建工具相关的依赖，将构建工具相关的依赖插入到package.json中
   async buildToolGenerator() {
     const buildGenerator = await this.loadBase(
-      `packages/core/template/template-${this.buildTool}-script/generator/index.cjs`,
+      `packages/core/dist/template/template-${this.buildTool}-script/generator/index.js`,
       "",
     );
 
@@ -326,7 +328,7 @@ class Generator {
     await this.buildToolGenerator();
 
     // 与构建工具有关的配置全部添加完毕，生成构建工具配置文件
-    const buildConfigFinalContent = generator(this.buildToolConfigAst).code;
+    const buildConfigFinalContent = generator.default(this.buildToolConfigAst).code;
     // 将构建工具配置文件也添加到根文件树对象中
     const buildToolConfigName = `${this.buildTool}.config.js`;
     this.files.addToTreeByFile(buildToolConfigName, buildConfigFinalContent);

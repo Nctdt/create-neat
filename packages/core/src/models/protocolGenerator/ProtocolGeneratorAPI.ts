@@ -1,11 +1,14 @@
 import fs from "fs";
 import path from "path";
 
-import { ProtocolProps } from "../BaseAPI";
-import { getTargetFileData, replaceDynamicSlot } from "../../utils/commonUtils";
-import { createImportDeclaration, exportDefaultDeclarationUtils } from "../../utils/ast/commonAst";
-import { transformCode } from "../../utils/ast/utils";
-import { FileData } from "../FileTree";
+import { ProtocolProps } from "../BaseAPI.js";
+import { getTargetFileData, replaceDynamicSlot } from "../../utils/commonUtils.js";
+import {
+  createImportDeclaration,
+  exportDefaultDeclarationUtils,
+} from "../../utils/ast/commonAst.js";
+import { transformCode } from "../../utils/ast/utils.js";
+import { FileData } from "../FileTree.js";
 
 /**
  * 通用类，为 插件/框架/构建工具 之间的影响定义协议处理器
@@ -31,7 +34,7 @@ class ProtocolGeneratorAPI {
 
   ENTRY_FILE(params) {
     // todo: 路径可能存在问题
-    const srcDir = path.resolve(__dirname, "src"); // src 目录路径
+    const srcDir = path.resolve(import.meta.dirname, "src"); // src 目录路径
     const content = params.content;
 
     // 处理入口文件

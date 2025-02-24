@@ -2,10 +2,10 @@ import path from "path";
 import fs from "fs-extra";
 import ejs from "ejs";
 
-import { createFiles } from "../utils/createFiles";
-import formatCode from "../utils/formatCode";
+import { createFiles } from "../utils/createFiles.js";
+import formatCode from "../utils/formatCode.js";
 
-import PluginToTemplateAPI from "./protocolGenerator/PluginToTemplateAPI";
+import PluginToTemplateAPI from "./protocolGenerator/PluginToTemplateAPI.js";
 /**
  * 判断是否为文件夹
  * @param {string} path - 路径

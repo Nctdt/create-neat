@@ -1,3 +1,5 @@
+import TemplateAPI from "../../../src/models/TemplateAPI.js";
+
 const devDependencies = {
   autoprefixer: "^10.4.19",
   chalk: "^4.0.0",
@@ -31,7 +33,7 @@ const scripts = {
   analyzer: "cross-env NODE_ENV=production CLI=analyzer npx webpack build --config ./webpack.config.js",
 };
 
-module.exports = (templateAPI, template) => {
+export default (templateAPI: TemplateAPI, template: string) => {
   if (template === "vue") {
     templateAPI.extendPackage({
       scripts,

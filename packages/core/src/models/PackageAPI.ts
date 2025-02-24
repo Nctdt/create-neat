@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { createFiles } from "../utils/createFiles";
+import { createFiles } from "../utils/createFiles.js";
 /**
  * 封装对 package.json 文件的操作。
  * @class

@@ -1,7 +1,7 @@
-const protocol = require("../../../src/configs/protocol.ts")
-const templateToBuildToolProtocol = protocol.templateToBuildToolProtocol;
+import { templateToBuildToolProtocol } from "../../../src/configs/protocol.js";
+import TemplateAPI from "../../../src/models/TemplateAPI.js";
 
-module.exports = (templateAPI) => {
+export default (templateAPI: TemplateAPI) => {
   templateAPI.extendPackage({
     dependencies: {
       vue: "^3.2.47",

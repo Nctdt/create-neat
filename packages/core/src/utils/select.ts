@@ -2,11 +2,11 @@ import { multiselect, select, intro, confirm, text } from "@clack/prompts";
 import chalk from "chalk";
 import { execSync } from "child_process";
 
-import { buildToolType } from "../types";
+import { buildToolType } from "../types/index.js";
 
-import { getPreset, defaultPreset } from "./preset";
-import { getNpmSource } from "./getnpmSource";
-import { savePresetToRcPath, getRcPath, loadRcOptions } from "./options";
+import { getPreset, defaultPreset } from "./preset.js";
+import { getNpmSource } from "./getnpmSource.js";
+import { savePresetToRcPath, getRcPath, loadRcOptions } from "./options.js";
 
 const registryInfo = execSync("npm config get registry").toString().trim();
 const npmSource: any = getNpmSource();

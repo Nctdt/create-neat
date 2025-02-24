@@ -5,7 +5,7 @@
   "description": "Zero configuration to quickly create your application",
   "license": "MIT",
   "homepage": "https://github.com/xun082/create-neat",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/xun082/create-neat/issues"
   },
@@ -15,12 +15,13 @@
     "directory": "packages/core"
   },
   "bin": {
-    "create-neat": "./dist/index.js",
-    "cn": "./dist/index.js"
+    "create-neat": "./dist/src/index.js",
+    "cn": "./dist/src/index.js"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc -w -p ./tsconfig.dev.json",
+    "build": "tsc && npm run copyfile",
+    "dev": "npm run copyfile && tsc -w -p ./tsconfig.dev.json",
+    "copyfile": "node copyfile.js",
     "check": "npx tsc"
   },
   "files": [

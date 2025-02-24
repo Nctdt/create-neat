@@ -1,12 +1,14 @@
 import chalk from "chalk";
 import ora from "ora";
-import fs, { readFileSync } from "fs-extra";
+import fs from "fs-extra";
 import { join } from "node:path";
 import { rmSync } from "node:fs";
+import { resolveApp } from "@laconic/utils";
 
-import { CLIENT_OS } from "./constants";
+import { CLIENT_OS } from "./constants.js";
 
-const { resolveApp } = require("@laconic/utils");
+const { readFileSync } = fs;
+const __dirname = import.meta.dirname;
 
 /**
  * @author moment

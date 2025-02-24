@@ -1,4 +1,4 @@
-import type { buildToolType } from "../types";
+import type { buildToolType } from "../types/index.js";
 
 /**
  * 表示用户的预设配置。
