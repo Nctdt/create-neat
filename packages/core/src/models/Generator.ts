@@ -235,7 +235,6 @@ class Generator {
   // 单独处理一个框架相关依赖，主要是将框架相关的依赖包插入到pkg内，以及将需要的构建工具配置合并到构建工具模板中
   async templateGenerate() {
     const templatePath = `packages/core/dist/template/template-${this.templateName}/generator/index.js`;
-    console.log("templatePath: ", templatePath);
     const templateGenerator = await this.loadBase(templatePath, "");
 
     if (templateGenerator && typeof templateGenerator === "function") {
