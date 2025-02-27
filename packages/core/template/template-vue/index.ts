@@ -10,7 +10,7 @@ const buildToolConfigs = {
   // 添加其他构建工具的配置...
 };
 
-const pluginAngular = (buildTool) => {
+const pluginVue = (buildTool: string) => {
   const configHandler = buildToolConfigs[buildTool];
 
   if (configHandler) {
@@ -22,4 +22,4 @@ const pluginAngular = (buildTool) => {
   // ……
 };
 
-module.exports = pluginAngular;
+export default pluginVue;

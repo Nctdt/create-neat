@@ -1,9 +1,9 @@
 import path from "path";
 
-import { createConfigByParseAst } from "../../utils/ast/parseAst";
-import { relativePathToRoot } from "../../utils/constants";
+import { createConfigByParseAst } from "../../utils/ast/parseAst.js";
+import { relativePathToRoot } from "../../utils/constants.js";
 
-import ProtocolGeneratorAPI from "./ProtocolGeneratorAPI";
+import ProtocolGeneratorAPI from "./ProtocolGeneratorAPI.js";
 
 /**
  * 框架对构建工具协议
@@ -53,7 +53,7 @@ class TemplateToBuildToolAPI extends ProtocolGeneratorAPI {
         // 执行 plugin或模板的入口文件，把 config 合并到构建工具原始配置中
         const baseEntry = await this.loadModule(
           entryPath,
-          path.resolve(__dirname, relativePathToRoot),
+          path.resolve(import.meta.dirname, relativePathToRoot),
         );
         // 处理构建工具配置
         if (typeof baseEntry === "function") {

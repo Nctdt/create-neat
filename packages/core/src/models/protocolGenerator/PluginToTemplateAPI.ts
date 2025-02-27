@@ -1,6 +1,6 @@
-import { FileData } from "../FileTree";
+import { FileData } from "../FileTree.js";
 
-import ProtocolGeneratorAPI from "./ProtocolGeneratorAPI";
+import ProtocolGeneratorAPI from "./ProtocolGeneratorAPI.js";
 
 /**
  * 样式插件参数

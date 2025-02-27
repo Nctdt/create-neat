@@ -1,3 +1,5 @@
+import path from "path";
+
 /**
  * 包含可用模板的名称列表。
  * @type {string[]}
@@ -38,6 +40,12 @@ export const projectLink: Map<string, string> = getProjectLink(template);
  * @constant {string}
  */
 export const relativePathToRoot = "../../../../";
+
+/**
+ * cn 项目根目录 因为打包进 dist 所以需要多.. 一层
+ * @constant {string}
+ */
+export const CNRootDirectory = path.resolve(import.meta.dirname, "../../../../../");
 
 export const buildToolConfigDevDependencies = {
   webpack: {

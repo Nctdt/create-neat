@@ -1,13 +1,19 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src"],
+  "include": ["."],
+  "exclude": ["template/webpack.config.js", "dist", "template/template-*/generator/template"],
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "src",
+    "rootDir": ".",
+    "baseUrl": ".",
     "types": ["node"],
     "target": "ESNext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
+    "allowJs": true,
+    "paths": {
+      "@laconic/*": ["../*"]
+    }
   }
 }

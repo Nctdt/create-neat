@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import chalk from "chalk";
 
-import { readTemplateFileContent } from "./fileController";
+import { readTemplateFileContent } from "./fileController.js";
 
 /**
  * 生成一系列指定的文件

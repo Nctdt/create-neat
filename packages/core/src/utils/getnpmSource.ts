@@ -1,6 +1,6 @@
 import https from "https";
 
-import { npmRegistries, type Source, type RegistryInfo } from "../configs/npmRegistries";
+import { npmRegistries, type Source, type RegistryInfo } from "../configs/npmRegistries.js";
 
 /**
  * 获取 npm 源以及最快的 npm 源。

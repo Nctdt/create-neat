@@ -4,7 +4,7 @@ import os from "os";
 import process from "process";
 import chalk from "chalk";
 
-import { Preset } from "./preset";
+import { Preset } from "./preset.js";
 
 /**
  * @description 获取用户系统主目录下保存预设的文件路径

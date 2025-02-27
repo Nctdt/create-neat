@@ -6,10 +6,10 @@ import minimist from "minimist";
 import fs from "fs";
 import path from "path";
 
-import createApp from "./utils/createApp";
-import { checkVersion } from "./utils/checkVersion";
+import createApp from "./utils/createApp.js";
+import { checkVersion } from "./utils/checkVersion.js";
 
-const packagePath = path.join(__dirname, "../package.json");
+const packagePath = path.join(import.meta.dirname, "../../package.json");
 const version = JSON.parse(fs.readFileSync(packagePath, "utf8")).version;
 
 const program = new Command();

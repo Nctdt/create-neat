@@ -1,7 +1,7 @@
-const { parse } = require("@babel/parser");
-const traverse = require("@babel/traverse").default;
-const t = require("@babel/types");
-const generate = require("@babel/generator").default;
+import { parse } from "@babel/parser";
+import traverse from "@babel/traverse";
+import t from "@babel/types";
+import generate from "@babel/generator";
 
 /**
  * 封装AST操作的通用函数
@@ -90,5 +90,5 @@ export function transformCode(fileContent: string, operations: any, parserOption
   });
 
   // 3. 生成新的代码
-  return generate(ast, {}, fileContent).code;
+  return generate.default(ast, {}, fileContent).code;
 }

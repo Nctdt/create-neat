@@ -1,5 +1,5 @@
-import Generator from "./Generator";
-import BaseAPI from "./BaseAPI";
+import Generator from "./Generator.js";
+import BaseAPI from "./BaseAPI.js";
 
 /**
  * 为执行 generator 提供系一列 api

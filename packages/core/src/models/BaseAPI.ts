@@ -1,17 +1,17 @@
 import fs from "fs";
 import path from "path";
 
-import { Preset } from "../utils/preset";
+import { Preset } from "../utils/preset.js";
+import {
+  pluginToBuildToolProtocol,
+  pluginToTemplateProtocol,
+  templateToBuildToolProtocol,
+} from "../configs/protocol.js";
 
-import Generator from "./Generator";
-import PluginToTemplateAPI from "./protocolGenerator/PluginToTemplateAPI";
-import TemplateToBuildToolAPI from "./protocolGenerator/TemplateToBuildToolAPI";
-import FileTree from "./FileTree";
-
-const Protocols = require("../configs/protocol");
-
-const { pluginToTemplateProtocol, pluginToBuildToolProtocol, templateToBuildToolProtocol } =
-  Protocols;
+import Generator from "./Generator.js";
+import PluginToTemplateAPI from "./protocolGenerator/PluginToTemplateAPI.js";
+import TemplateToBuildToolAPI from "./protocolGenerator/TemplateToBuildToolAPI.js";
+import FileTree from "./FileTree.js";
 
 interface ConfigFileData {
   file: Record<string, string[]>;
