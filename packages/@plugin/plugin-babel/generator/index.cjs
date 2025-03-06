@@ -1,3 +1,8 @@
+// const path = require("path");
+// import pluginToBuildToolProtocol from "../../../core/src/configs/protocol.ts";
+const protocol = require("../../../core/src/configs/protocol.ts");
+const pluginToBuildToolProtocol = protocol.pluginToBuildToolProtocol;
+
 // 通用的Babel预设和插件
 const commonBabelPresets = [
   [
@@ -42,7 +47,7 @@ const vueBabelConfig = {
   plugins: ["@vue/babel-plugin-jsx", ...commonBabelPlugins],
 };
 
-module.exports = (generatorAPI, template) => {
+module.exports = (generatorAPI, template, buildTool) => {
   let config;
   if (template === "react") {
     config = {
@@ -65,8 +70,17 @@ module.exports = (generatorAPI, template) => {
       },
     };
   }
+
   // 扩展package.json配置
   generatorAPI.extendPackage({
     ...config,
+  });
+
+  generatorAPI.protocolGenerate({
+    [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
+      compiler: "babel",
+      template,
+      buildTool,
+    },
   });
 };

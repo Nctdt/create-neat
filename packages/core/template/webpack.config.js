@@ -23,20 +23,6 @@ const { VueLoaderPlugin } = require('vue-loader');
 const ElementPlus = require('unplugin-element-plus/webpack');
 <% } %>
 
-
-
-let tsxOrJsxLoader;
-
-  <% if (framework==='react' ) { %>
-    tsxOrJsxLoader = {
-    test: /\.(tsx?|jsx?)$/,
-    include: [path.resolve(__dirname, "./src")],
-    loader: "babel-loader",
-    exclude: [/node_modules/, /public/, /(.|_)min\.js$/]
-    }
-  <% } %>
-
-
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 const isAnalyzer = process.env.CLI === "analyzer";
@@ -111,7 +97,6 @@ module.exports = {
           <% } %>
           : MiniCssExtractPlugin.loader,'css-loader','postcss-loader'].filter(Boolean),
       },
-      tsxOrJsxLoader,
       {
         test: /\.(jpe?g|png|gif|webp|svg|mp4)$/,
         type: 'asset',

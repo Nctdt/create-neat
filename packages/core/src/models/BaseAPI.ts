@@ -11,13 +11,14 @@ import {
 import Generator from "./Generator.js";
 import PluginToTemplateAPI from "./protocolGenerator/PluginToTemplateAPI.js";
 import TemplateToBuildToolAPI from "./protocolGenerator/TemplateToBuildToolAPI.js";
+import PluginToBuildToolAPI from "./protocolGenerator/PluginToBuildToolAPI.js";
 import FileTree from "./FileTree.js";
 
 interface ConfigFileData {
   file: Record<string, string[]>;
 }
 
-type ProtocolAPI = PluginToTemplateAPI | TemplateToBuildToolAPI /* | PluginToBuildToolAPI */;
+type ProtocolAPI = PluginToTemplateAPI | TemplateToBuildToolAPI | PluginToBuildToolAPI;
 
 /**
  * 传入协议的参数，不再对每个协议单独传参，而是统一挂载在API上
@@ -65,7 +66,7 @@ class BaseAPI {
       if (protocol in pluginToTemplateProtocol) {
         api = new PluginToTemplateAPI(protocols, props, protocol);
       } else if (protocol in pluginToBuildToolProtocol) {
-        // api = new PluginToBuildToolAPI(protocols);
+        api = new PluginToBuildToolAPI(protocols, props, protocol);
       } else if (protocol in templateToBuildToolProtocol) {
         api = new TemplateToBuildToolAPI(protocols, props, protocol);
       }

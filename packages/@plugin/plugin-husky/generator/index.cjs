@@ -28,7 +28,7 @@ const basicConfig = (pkgManager) => {
       "@commitlint/cli": "^18.4.3",
       "@commitlint/config-conventional": "^18.4.3",
     },
-  }
+  };
 };
 
 const generateBasicConfig = (generatorAPI, pkgManager) => {

@@ -163,11 +163,12 @@ class Generator {
   }
 
   // 根据环境变量加载 plugin/template
+  // 返回增加可选的buildTool，编译器插件(babel/swc)需要
   async loadBase(
     pkgPath: string,
     modulePath: string,
-  ): Promise<(api: BaseAPI, template?: string) => Promise<any>> {
-    let baseGenerator: (api: BaseAPI, template?: string) => Promise<any>;
+  ): Promise<(api: BaseAPI, template?: string, buildTool?: buildToolType) => Promise<any>> {
+    let baseGenerator: (api: BaseAPI, template?: string, buildTool?: buildToolType) => Promise<any>;
     if (process.env.NODE_ENV === "DEV") {
       const basePathInDev = pkgPath;
       baseGenerator = await loadModule(basePathInDev);
@@ -208,9 +209,12 @@ class Generator {
     );
 
     const isHusky = pluginName === "husky";
+    const isCompiler = pluginName === "babel" || pluginName === "swc";
     if (pluginGenerator && typeof pluginGenerator === "function") {
       if (isHusky) {
         await pluginGenerator(this.generatorAPI, JSON.stringify(this.preset));
+      } else if (isCompiler) {
+        await pluginGenerator(this.generatorAPI, this.templateName, this.buildTool);
       } else {
         await pluginGenerator(this.generatorAPI, this.templateName);
       }

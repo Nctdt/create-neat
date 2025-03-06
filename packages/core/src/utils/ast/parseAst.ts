@@ -1,5 +1,13 @@
 import traverse from "@babel/traverse";
-import { objectExpression, regExpLiteral, stringLiteral, arrayExpression } from "@babel/types";
+import {
+  objectExpression,
+  regExpLiteral,
+  stringLiteral,
+  arrayExpression,
+  callExpression,
+  memberExpression,
+  identifier,
+} from "@babel/types";
 
 import { buildToolType } from "../../types/index.js";
 
@@ -56,6 +64,17 @@ export const createConfigByParseAst = (buildTool: buildToolType, options: Option
 };
 
 /**
+ * 创建动态路径解析调用
+ * @param args 路径参数
+ */
+function createPathResolveCall(args: string[]) {
+  return callExpression(memberExpression(identifier("path"), identifier("resolve")), [
+    identifier("__dirname"),
+    ...args.map((arg) => stringLiteral(arg)),
+  ]);
+}
+
+/**
  * 合并webpack config ast
  * 目前支持loaders、plugins
  * @param rules 本次合并的loader rules
@@ -64,7 +83,7 @@ export const createConfigByParseAst = (buildTool: buildToolType, options: Option
  */
 function mergeWebpackConfigAst(options: Options, ast) {
   const { rules, plugins } = options;
-  if (!plugins) return;
+  // if (!plugins) return;
   traverse(ast, {
     ExpressionStatement(path) {
       const astNode = path.node;
@@ -76,10 +95,10 @@ function mergeWebpackConfigAst(options: Options, ast) {
         // 匹配到plugins属性，根据传入的options中的plugin生成ast进行插入
         if (property.key.name === "plugins") {
           const pluginAstNodes = [];
-          plugins.forEach((plugin) => {
+          plugins?.forEach((plugin) => {
             pluginAstNodes.push(createNewExpression(plugin.name, []));
           });
-          pluginAstNodes.forEach((ast) => property.value.callee.object.elements.push(ast));
+          pluginAstNodes?.forEach((ast) => property.value.callee.object.elements.push(ast));
         }
         // 匹配到module属性，将传入的options中的rules转化为ast进行插入
         if (property.key.name === "module") {
@@ -92,7 +111,17 @@ function mergeWebpackConfigAst(options: Options, ast) {
             let ruleAstNode;
             // 如果include属性为数组
             if (Array.isArray(rule.include)) {
-              parseIncludeAst = arrayExpression(rule.include.map((item) => stringLiteral(item)));
+              // 处理include的处理逻辑，能够支持动态路径解析
+              parseIncludeAst = arrayExpression(
+                rule.include.map((item) => {
+                  if (typeof item === "object" && item.__astType === "pathResolve") {
+                    return createPathResolveCall(item.args);
+                  }
+                  return typeof item === "string"
+                    ? stringLiteral(item)
+                    : regExpLiteral(item.pattern);
+                }),
+              );
             } else {
               // 如果include属性值为正则表达式
               parseIncludeAst = regExpLiteral(formatReg(`${rule.include}`));
