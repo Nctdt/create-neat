@@ -147,6 +147,11 @@ export default async function createAppTest(projectName: string, options: Record
 
   // 安装传入的依赖
   if (process.env.NODE_ENV === "PROD") {
+    const packageJsonPath = path.join(rootDirectory, "package.json");
+    // 如果 package.json 不存在，则创建一个最简单的版本
+    if (!fs.existsSync(packageJsonPath)) {
+      fs.writeFileSync(packageJsonPath, JSON.stringify(packageContent, null, 2));
+    }
     await dependenciesInstall(rootDirectory, packageManager);
   }
 
