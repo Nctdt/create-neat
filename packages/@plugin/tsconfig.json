@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["."],
-  "exclude": ["template/webpack.config.js", "dist", "template/template-*/generator/template"],
+  "include": [".", "../core/src/models/GeneratorAPI.ts"],
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": ".",
@@ -12,9 +11,6 @@
     "moduleResolution": "nodenext",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "declaration": true,
-    "paths": {
-      "@laconic/*": ["../*"]
-    }
+    "paths": {}
   }
 }

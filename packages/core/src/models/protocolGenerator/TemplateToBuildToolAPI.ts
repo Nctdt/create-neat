@@ -2,6 +2,7 @@ import path from "path";
 
 import { createConfigByParseAst } from "../../utils/ast/parseAst.js";
 import { relativePathToRoot } from "../../utils/constants.js";
+import { TSPluginNames } from "../../configs/TSPluginAdaptor.js";
 
 import ProtocolGeneratorAPI from "./ProtocolGeneratorAPI.js";
 
@@ -49,7 +50,12 @@ class TemplateToBuildToolAPI extends ProtocolGeneratorAPI {
     for (const plugin in plugins) {
       if (Object.prototype.hasOwnProperty.call(plugins, plugin)) {
         // 确保只遍历对象自身的属性
-        const entryPath = `@plugin/plugin-${plugin}/index.cjs`;
+        let entryPath = `@plugin/plugin-${plugin}/index.cjs`;
+        /** @todo TS 插件路径适配 完成后删除 */
+
+        if (TSPluginNames.includes(plugin)) {
+          entryPath = `@plugin/plugin-${plugin}/dist/index.js`;
+        }
         // 执行 plugin或模板的入口文件，把 config 合并到构建工具原始配置中
         const baseEntry = await this.loadModule(
           entryPath,

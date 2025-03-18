@@ -12,6 +12,7 @@ import { Preset } from "../utils/preset.js";
 import { readTemplateFileContent } from "../utils/fileController.js";
 import generateBuildToolConfigFromEJS from "../utils/generateBuildToolConfigFromEJS.js";
 import { buildToolType } from "../types/index.js";
+import { judgePluginPath } from "../configs/TSPluginAdaptor.js";
 
 import GeneratorAPI from "./GeneratorAPI.js";
 import ConfigTransform from "./ConfigTransform.js";
@@ -109,6 +110,7 @@ async function loadModule(modulePath: string, rootDirectory: string = CNRootDire
    * @type {string}
    */
   const resolvedPath = path.resolve(rootDirectory, modulePath);
+  if (!fs.existsSync(resolvedPath)) return null;
   const fileUrlPath = pathToFileURL(resolvedPath).href;
   try {
     const module = await import(fileUrlPath);
@@ -203,8 +205,11 @@ class Generator {
 
   // 单独处理一个插件相关文件
   async pluginGenerate(pluginName: string) {
+    /** @todo TS 插件路径适配 完成后删除 */
+    const { pluginIndexPath, pluginGeneratorPath, pluginTemplatePath } =
+      judgePluginPath(pluginName);
     const pluginGenerator = await this.loadBase(
-      `packages/@plugin/plugin-${pluginName}/generator/index.cjs`,
+      pluginGeneratorPath,
       `node_modules/${pluginName}-plugin-test-ljq`,
     );
 
@@ -220,11 +225,8 @@ class Generator {
       }
     }
 
-    const templatePath = resolve(
-      __dirname,
-      relativePathToRoot,
-      `packages/@plugin/plugin-${pluginName}/generator/template`,
-    );
+    /** @todo TS 插件路径适配 完成后删除 */
+    const templatePath = resolve(__dirname, relativePathToRoot, pluginTemplatePath);
 
     if (fs.existsSync(templatePath)) {
       // 将文件添加到根文件树对象中,最后一起生成
@@ -233,7 +235,7 @@ class Generator {
     }
 
     // 如果插件有在构建工具配置文件中插入特有配置的需求，需要调用该函数借助ast进行插入
-    await this.mergeBuildToolConfigByAst(`packages/@plugin/plugin-${pluginName}/index.cjs`);
+    await this.mergeBuildToolConfigByAst(pluginIndexPath);
   }
 
   // 单独处理一个框架相关依赖，主要是将框架相关的依赖包插入到pkg内，以及将需要的构建工具配置合并到构建工具模板中

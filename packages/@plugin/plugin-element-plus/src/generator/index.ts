@@ -1,4 +1,6 @@
-module.exports = (generatorAPI) => {
+import type GeneratorAPI from "../../../../core/dist/src/models/GeneratorAPI.js";
+
+export default (generatorAPI: GeneratorAPI) => {
   generatorAPI.extendPackage({
     dependencies: {
       "element-plus": "^2.7.8",
