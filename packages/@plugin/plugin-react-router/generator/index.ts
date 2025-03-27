@@ -1,7 +1,12 @@
-const protocol = require("../../../core/src/configs/protocol.ts");
-const pluginToTemplateProtocol = protocol.pluginToTemplateProtocol;
+// 采用 ES Module 导入方式
+import { pluginToTemplateProtocol } from "../../../core/dist/src/configs/protocol.js";
 
-module.exports = (generatorAPI) => {
+interface GeneratorAPI {
+  extendPackage: (config: object) => void;
+  protocolGenerate: (config: object) => void;
+}
+
+const routerPlugin = (generatorAPI: GeneratorAPI) => {
   generatorAPI.extendPackage({
     dependencies: {
       "react-router-dom": "^6.0.0",
@@ -23,7 +28,10 @@ module.exports = (generatorAPI) => {
           },
         ],
         astOptions: {
-          parserOptions: { sourceType: "module", plugins: ["typescript", "jsx"] },
+          parserOptions: {
+            sourceType: "module",
+            plugins: ["typescript", "jsx"] as const, // 使用 const 断言
+          },
         },
       },
     },
@@ -45,3 +53,5 @@ module.exports = (generatorAPI) => {
     },
   });
 };
+
+export default routerPlugin;

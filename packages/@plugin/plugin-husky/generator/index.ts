@@ -1,7 +1,17 @@
-const path = require("path");
-const fs = require("fs");
+import path from "path";
+import fs from "fs";
 
-function fileRender(files) {
+import type GeneratorAPI from "../../../core/dist/src/models/GeneratorAPI.js";
+
+const __dirname = import.meta.dirname;
+
+interface Preset {
+  packageManager: string;
+}
+
+type ConfigGenerator = (generatorAPI: GeneratorAPI, pkgManager: string) => void;
+
+function fileRender(files: Record<string, string>): void {
   try {
     const outputDir = path.join(__dirname, "template");
     Object.entries(files).forEach(([filePath, content]) => {
@@ -13,7 +23,7 @@ function fileRender(files) {
   }
 }
 
-const basicConfig = (pkgManager) => {
+const basicConfig = (pkgManager: string) => {
   return {
     scripts: {
       postinstall: "husky install",
@@ -31,7 +41,7 @@ const basicConfig = (pkgManager) => {
   };
 };
 
-const generateBasicConfig = (generatorAPI, pkgManager) => {
+const generateBasicConfig: ConfigGenerator = (generatorAPI, pkgManager) => {
   generatorAPI.extendPackage(basicConfig(pkgManager));
   const files = {
     ".commitlintrc.js": `module.exports = {
@@ -41,7 +51,7 @@ const generateBasicConfig = (generatorAPI, pkgManager) => {
   fileRender(files);
 };
 
-const generateStrictConfig = (generatorAPI, pkgManager) => {
+const generateStrictConfig: ConfigGenerator = (generatorAPI, pkgManager) => {
   const res = basicConfig(pkgManager);
   generatorAPI.extendPackage({
     ...res,
@@ -75,17 +85,19 @@ const generateStrictConfig = (generatorAPI, pkgManager) => {
   fileRender(files);
 };
 
-const configs = {
+const configs: Record<string, ConfigGenerator> = {
   basic: generateBasicConfig,
   strict: generateStrictConfig,
 };
 
-module.exports = (generatorAPI, curPreset, configType = "basic") => {
+export default (generatorAPI: GeneratorAPI, curPreset: string, configType: string = "basic") => {
   const generator = configs[configType];
-  const pkgManager = JSON.parse(curPreset).packageManager;
+  const pkgManager = (JSON.parse(curPreset) as Preset).packageManager;
+
   if (!generator) {
     console.warn(`不支持的配置类型：${configType}`);
     return configs.basic(generatorAPI, pkgManager);
   }
+
   return generator(generatorAPI, pkgManager);
 };

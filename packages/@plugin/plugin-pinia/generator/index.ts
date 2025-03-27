@@ -1,7 +1,12 @@
-const protocol = require("../../../core/src/configs/protocol.ts");
-const pluginToTemplateProtocol = protocol.pluginToTemplateProtocol;
+import { pluginToTemplateProtocol } from "../../../core/dist/src/configs/protocol.js";
 
-module.exports = (generatorAPI) => {
+// 如果需要，可以为 generatorAPI 添加类型
+interface GeneratorAPI {
+  extendPackage: (packageConfig: Record<string, any>) => void;
+  protocolGenerate: (protocolConfig: Record<string, any>) => void;
+}
+
+export default (generatorAPI: GeneratorAPI) => {
   generatorAPI.extendPackage({
     dependencies: {
       pinia: "^2.2.2",
