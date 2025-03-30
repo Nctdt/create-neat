@@ -1,6 +1,8 @@
 {
   "name": "create-neat",
   "private": true,
+  "module": "module",
+  "type": "module",
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev --concurrency=15",
@@ -71,7 +73,7 @@
     "typescript": "^5.4.5"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=20",
     "pnpm": "9.4.0"
   },
   "engineStrict": true,

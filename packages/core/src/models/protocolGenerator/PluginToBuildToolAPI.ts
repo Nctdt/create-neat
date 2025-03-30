@@ -77,7 +77,6 @@ class PluginToBuildToolAPI extends ProtocolGeneratorAPI {
     } else if (template === "vue") {
       test = /\.(ts|js)$/;
     }
-
     const buildToolConfig = buildToolConfigGenerators[buildTool]({ test, compiler });
     if (!buildToolConfig) {
       throw new Error(`不支持的构建工具: ${buildTool}`);

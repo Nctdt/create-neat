@@ -3,5 +3,8 @@
   "type": "module",
   "version": "1.0.0",
   "description": "mobx plugin for react",
+  "scripts": {
+    "dev": "tsc"
+  },
   "dependencies": {}
 }

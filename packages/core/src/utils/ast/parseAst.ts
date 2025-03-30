@@ -84,7 +84,7 @@ function createPathResolveCall(args: string[]) {
 function mergeWebpackConfigAst(options: Options, ast) {
   const { rules, plugins } = options;
   // if (!plugins) return;
-  traverse(ast, {
+  traverse.default(ast, {
     ExpressionStatement(path) {
       const astNode = path.node;
       // 只匹配模板中的module.exports部分
@@ -191,7 +191,7 @@ function mergeWebpackConfigAst(options: Options, ast) {
 function mergeViteConfigAst(options: Options, ast) {
   const { plugins } = options;
   if (!plugins) return;
-  traverse(ast, {
+  traverse.default(ast, {
     ImportDeclaration: (path) => {
       plugins.forEach((plugin) => {
         // 处理导入
