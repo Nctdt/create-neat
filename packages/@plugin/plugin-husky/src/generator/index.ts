@@ -1,7 +1,6 @@
 import path from "path";
 import fs from "fs";
-
-import type GeneratorAPI from "../../../../core/dist/src/models/GeneratorAPI.js";
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 const __dirname = import.meta.dirname;
 

@@ -11,6 +11,8 @@
     "moduleResolution": "nodenext",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    "paths": {}
+    "paths": {
+      "@src/*": ["../core/dist/src/*"]
+    }
   }
 }

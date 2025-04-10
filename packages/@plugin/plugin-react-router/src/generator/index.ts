@@ -1,5 +1,5 @@
 // 采用 ES Module 导入方式
-import { pluginToTemplateProtocol } from "../../../../core/dist/src/configs/protocol.js";
+import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
 
 interface GeneratorAPI {
   extendPackage: (config: object) => void;

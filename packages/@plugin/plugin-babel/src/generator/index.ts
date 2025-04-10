@@ -1,8 +1,7 @@
 // const path = require("path");
 // import pluginToBuildToolProtocol from "../../../core/src/configs/protocol.ts";
-import { pluginToBuildToolProtocol } from "../../../../core/dist/src/configs/protocol.js";
-import type GeneratorAPI from "../../../../core/dist/src/models/GeneratorAPI.js";
-
+import { pluginToBuildToolProtocol } from "@src/configs/protocol.js";
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 // 通用的Babel预设和插件
 const commonBabelPresets = [
   [
