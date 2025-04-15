@@ -39,7 +39,7 @@ process.stdin.on("data", (key) => {
  * @param {string} filePath - 文件路径。
  * @param {string} content - 文件内容。
  */
-function createDirAndWriteFile(filePath: string, content: string) {
+export function createDirAndWriteFile(filePath: string, content: string) {
   const directory = path.dirname(filePath);
 
   if (!fs.existsSync(directory)) {

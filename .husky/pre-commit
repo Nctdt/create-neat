@@ -2,6 +2,7 @@ sh scripts/check-git-config.sh
 
 echo 'running pre-commit checks ...'
 
+echo '\033[33m 如修改了方法类函数请确保相关测试用例已更新，并通过了覆盖率测试, 可在Core目录下运行 npm run test:coverage 查看\033[0m'
 # 运行 lint-staged
 npx lint-staged -q
 

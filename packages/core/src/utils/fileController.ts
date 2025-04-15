@@ -1,14 +1,17 @@
 import chalk from "chalk";
 import ora from "ora";
 import fs from "fs-extra";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
 import { rmSync } from "node:fs";
 import { resolveApp } from "@laconic/utils";
+import { fileURLToPath } from "node:url";
 
 import { CLIENT_OS } from "./constants.js";
 
 const { readFileSync } = fs;
-const __dirname = import.meta.dirname;
+// 使用标准 ES 模块方式获取当前文件目录
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /**
  * @author moment

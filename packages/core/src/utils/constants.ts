@@ -1,4 +1,9 @@
 import path from "path";
+import { fileURLToPath } from "node:url";
+
+// 使用标准 ES 模块方式获取当前文件目录
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * 包含可用模板的名称列表。
@@ -45,7 +50,7 @@ export const relativePathToRoot = "../../../../";
  * cn 项目根目录 因为打包进 dist 所以需要多.. 一层
  * @constant {string}
  */
-export const CNRootDirectory = path.resolve(import.meta.dirname, "../../../../../");
+export const CNRootDirectory = path.resolve(__dirname, "../../../../../");
 
 export const buildToolConfigDevDependencies = {
   webpack: {
