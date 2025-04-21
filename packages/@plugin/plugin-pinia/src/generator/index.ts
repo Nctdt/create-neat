@@ -1,4 +1,4 @@
-import { pluginToTemplateProtocol } from "../../../../core/dist/src/configs/protocol.js";
+import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
 
 // 如果需要，可以为 generatorAPI 添加类型
 interface GeneratorAPI {

@@ -1,8 +1,7 @@
 import path from "path";
 import fs from "fs";
-
-import type GeneratorAPI from "../../../../core/dist/src/models/GeneratorAPI.js";
-import { pluginToTemplateProtocol } from "../../../../core/dist/src/configs/protocol.js";
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
+import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
 
 // ESM 环境下的路径处理
 const __dirname = import.meta.dirname;
@@ -56,7 +55,7 @@ export default (generatorAPI: GeneratorAPI) => {
 
 class CounterStore {
   /* observable-properties */
-  
+
   constructor() {
     makeAutoObservable(this);
   }

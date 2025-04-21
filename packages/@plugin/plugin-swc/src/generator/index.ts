@@ -1,4 +1,4 @@
-import { pluginToBuildToolProtocol } from "../../../../core/dist/src/configs/protocol.js"; // 推荐使用明确类型导出
+import { pluginToBuildToolProtocol } from "@src/configs/protocol.js"; // 推荐使用明确类型导出
 // 类型定义
 interface GeneratorAPI {
   extendPackage: (config: object) => void;

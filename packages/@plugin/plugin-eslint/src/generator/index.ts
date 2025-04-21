@@ -1,6 +1,6 @@
 // plugins/eslint/generator/index.ts
-import { pluginToBuildToolProtocol } from "../../../../core/dist/src/configs/protocol.js";
-import type GeneratorAPI from "../../../../core/dist/src/models/GeneratorAPI.js";
+import { pluginToBuildToolProtocol } from "@src/configs/protocol.js";
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 // 通用 ESLint 配置基座
 const baseESLintConfig = {

@@ -1,4 +1,4 @@
-import type GeneratorAPI from "../../../../core/dist/src/models/GeneratorAPI.js";
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 export default (generatorAPI: GeneratorAPI) => {
   generatorAPI.extendPackage({
