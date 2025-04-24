@@ -1,7 +1,19 @@
 // const path = require("path");
 // import pluginToBuildToolProtocol from "../../../core/src/configs/protocol.ts";
-import { pluginToBuildToolProtocol } from "@src/configs/protocol.js";
-import type GeneratorAPI from "@src/models/GeneratorAPI.js";
+// import { pluginToBuildToolProtocol } from "core-create-neat/dist/src/configs/protocol.js";
+
+import type GeneratorAPI from "core-create-neat/dist/src/models/GeneratorAPI.js";
+
+// 这里不采用tsc-alas引入而直接定义是因为，tsc-alias只在编译过程中起作用，而最终生成的实际文件仍然是未编译的引用（比如@src），这样node会出现找不到模块的情况。
+// 后期插件要考虑单独发包，所以插件尽量不要引入core内部的实际函数。（类型可以）
+const pluginToBuildToolProtocol = {
+  ADD_COMPILER_CONFIG: "ADD_COMPILER_CONFIG",
+  ENTRY_FILE: "ENTRY_FILE",
+  UPDATE_EXPORT_CONTENT_PROTOCOL: "UPDATE_EXPORT_CONTENT_PROTOCOL",
+  INSERT_IMPORT_PROTOCOL: "INSERT_IMPORT_PROTOCOL",
+  SLOT_CONTENT_PROTOCOL: "SLOT_CONTENT_PROTOCOL",
+};
+
 // 通用的Babel预设和插件
 const commonBabelPresets = [
   [
