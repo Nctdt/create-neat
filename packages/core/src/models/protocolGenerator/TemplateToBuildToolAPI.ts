@@ -1,8 +1,7 @@
 import path from "path";
 
 import { createConfigByParseAst } from "../../utils/ast/parseAst.js";
-import { relativePathToRoot } from "../../utils/constants.js";
-import { TSPluginNames } from "../../configs/TSPluginAdaptor.js";
+import { relativePathToRoot, TSPluginNames } from "../../utils/constants.js";
 
 import ProtocolGeneratorAPI from "./ProtocolGeneratorAPI.js";
 

@@ -87,3 +87,20 @@ function detectOS() {
 }
 
 export const CLIENT_OS = detectOS();
+
+/**
+ * 包含可用插件的名称列表。
+ * @type {string[]}
+ */
+export const TSPluginNames = [
+  "element-plus",
+  "babel",
+  "eslint",
+  "husky",
+  "mobx",
+  "pinia",
+  "prettier",
+  "react-router",
+  "scss",
+  "typescript",
+];

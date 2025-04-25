@@ -9,10 +9,9 @@ import { CNRootDirectory, relativePathToRoot } from "../utils/constants.js";
 import { createFiles } from "../utils/createFiles.js";
 import { createConfigByParseAst } from "../utils/ast/parseAst.js";
 import { Preset } from "../utils/preset.js";
-import { readTemplateFileContent } from "../utils/fileController.js";
+import { judgePluginPath, readTemplateFileContent } from "../utils/fileController.js";
 import generateBuildToolConfigFromEJS from "../utils/generateBuildToolConfigFromEJS.js";
 import { buildToolType } from "../types/index.js";
-import { judgePluginPath } from "../configs/TSPluginAdaptor.js";
 
 import GeneratorAPI from "./GeneratorAPI.js";
 import ConfigTransform from "./ConfigTransform.js";
