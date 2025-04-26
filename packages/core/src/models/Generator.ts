@@ -208,16 +208,8 @@ class Generator {
       `node_modules/${pluginName}-plugin-test-ljq`,
     );
 
-    const isHusky = pluginName === "husky";
-    const isCompiler = pluginName === "babel" || pluginName === "swc";
-    if (pluginGenerator.default && typeof pluginGenerator.default === "function") {
-      if (isHusky) {
-        await pluginGenerator.default(this.generatorAPI, JSON.stringify(this.preset));
-      } else if (isCompiler) {
-        await pluginGenerator.default(this.generatorAPI, this.templateName, this.buildTool);
-      } else {
-        await pluginGenerator.default(this.generatorAPI, this.templateName, this.buildTool);
-      }
+    if (pluginGenerator && typeof pluginGenerator === "function") {
+      await pluginGenerator(this.generatorAPI, this.templateName);
     }
     /** @todo TS 插件路径适配 完成后删除 */
     const templatePath = resolve(__dirname, relativePathToRoot, pluginTemplatePath);

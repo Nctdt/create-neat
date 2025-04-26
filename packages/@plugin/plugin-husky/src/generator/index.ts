@@ -4,10 +4,6 @@ import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 const __dirname = import.meta.dirname;
 
-interface Preset {
-  packageManager: string;
-}
-
 type ConfigGenerator = (generatorAPI: GeneratorAPI, pkgManager: string) => void;
 
 function fileRender(files: Record<string, string>): void {
@@ -89,10 +85,10 @@ const configs: Record<string, ConfigGenerator> = {
   strict: generateStrictConfig,
 };
 
-export default (generatorAPI: GeneratorAPI, curPreset: string, configType: string = "basic") => {
+module.exports = (generatorAPI, template, configType = "basic") => {
   const generator = configs[configType];
-  const pkgManager = (JSON.parse(curPreset) as Preset).packageManager;
-
+  const preset = generatorAPI.getPreset();
+  const pkgManager = preset.packageManager;
   if (!generator) {
     console.warn(`不支持的配置类型：${configType}`);
     return configs.basic(generatorAPI, pkgManager);
