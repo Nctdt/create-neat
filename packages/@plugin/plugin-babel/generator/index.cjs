@@ -47,8 +47,9 @@ const vueBabelConfig = {
   plugins: ["@vue/babel-plugin-jsx", ...commonBabelPlugins],
 };
 
-module.exports = (generatorAPI, template, buildTool) => {
+module.exports = (generatorAPI, template) => {
   let config;
+  const buildTool = generatorAPI.getBuildTool();
   if (template === "react") {
     config = {
       babel: reactBabelConfig,

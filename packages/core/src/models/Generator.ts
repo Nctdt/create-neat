@@ -208,16 +208,8 @@ class Generator {
       `node_modules/${pluginName}-plugin-test-ljq`,
     );
 
-    const isHusky = pluginName === "husky";
-    const isCompiler = pluginName === "babel" || pluginName === "swc";
     if (pluginGenerator && typeof pluginGenerator === "function") {
-      if (isHusky) {
-        await pluginGenerator(this.generatorAPI, JSON.stringify(this.preset));
-      } else if (isCompiler) {
-        await pluginGenerator(this.generatorAPI, this.templateName, this.buildTool);
-      } else {
-        await pluginGenerator(this.generatorAPI, this.templateName);
-      }
+      await pluginGenerator(this.generatorAPI, this.templateName);
     }
 
     const templatePath = resolve(

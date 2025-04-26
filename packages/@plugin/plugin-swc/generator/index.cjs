@@ -1,7 +1,8 @@
 const protocol = require("../../../core/src/configs/protocol.ts");
 const pluginToBuildToolProtocol = protocol.pluginToBuildToolProtocol;
 
-module.exports = (generatorAPI, template, buildTool) => {
+module.exports = (generatorAPI, template) => {
+  const buildTool = generatorAPI.getBuildTool();
   generatorAPI.extendPackage({
     // swc 的文件内容↓
     swc: {

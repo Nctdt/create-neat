@@ -80,9 +80,10 @@ const configs = {
   strict: generateStrictConfig,
 };
 
-module.exports = (generatorAPI, curPreset, configType = "basic") => {
+module.exports = (generatorAPI, template, configType = "basic") => {
   const generator = configs[configType];
-  const pkgManager = JSON.parse(curPreset).packageManager;
+  const preset = generatorAPI.getPreset();
+  const pkgManager = preset.packageManager;
   if (!generator) {
     console.warn(`不支持的配置类型：${configType}`);
     return configs.basic(generatorAPI, pkgManager);
