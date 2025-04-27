@@ -12,12 +12,12 @@ import { Preset } from "../utils/preset.js";
 import { judgePluginPath, readTemplateFileContent } from "../utils/fileController.js";
 import generateBuildToolConfigFromEJS from "../utils/generateBuildToolConfigFromEJS.js";
 import { buildToolType } from "../types/index.js";
+import { getDefaultExport } from "../utils/getDefaultExport.js";
 
 import GeneratorAPI from "./GeneratorAPI.js";
 import ConfigTransform from "./ConfigTransform.js";
 import TemplateAPI from "./TemplateAPI.js";
 import FileTree from "./FileTree.js";
-
 const __dirname = import.meta.dirname;
 interface ConfigFileData {
   file: Record<string, string[]>;
@@ -203,10 +203,11 @@ class Generator {
     /** @todo TS 插件路径适配 完成后删除 */
     const { pluginIndexPath, pluginGeneratorPath, pluginTemplatePath } =
       judgePluginPath(pluginName);
-    const pluginGenerator = await this.loadBase(
+    const pluginGeneratorModule = await this.loadBase(
       pluginGeneratorPath,
       `node_modules/${pluginName}-plugin-test-ljq`,
     );
+    const pluginGenerator = getDefaultExport(pluginGeneratorModule);
 
     if (pluginGenerator && typeof pluginGenerator === "function") {
       await pluginGenerator(this.generatorAPI, this.templateName);

@@ -22,7 +22,19 @@ const typescriptPlugin = (generatorAPI: GeneratorAPI) => {
   generatorAPI.protocolGenerate({
     [templateToBuildToolProtocol.ADD_CONFIG]: {
       params: {
-        content: "Specil plugin",
+        content: {
+          rules: [
+            {
+              test: /\.ts$/, // 匹配所有以 .ts 结尾的文件 (修正了正则表达式)
+              exclude: /node_modules/, // 排除 node_modules 目录
+              use: [
+                {
+                  loader: "ts-loader", // 指定 TS Loader
+                },
+              ],
+            },
+          ],
+        },
       },
       priority: 1,
     },

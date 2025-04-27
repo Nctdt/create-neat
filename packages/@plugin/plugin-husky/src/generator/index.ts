@@ -85,7 +85,7 @@ const configs: Record<string, ConfigGenerator> = {
   strict: generateStrictConfig,
 };
 
-module.exports = (generatorAPI, template, configType = "basic") => {
+const pluginConfig = (generatorAPI, template, configType = "basic") => {
   const generator = configs[configType];
   const preset = generatorAPI.getPreset();
   const pkgManager = preset.packageManager;
@@ -96,3 +96,5 @@ module.exports = (generatorAPI, template, configType = "basic") => {
 
   return generator(generatorAPI, pkgManager);
 };
+
+export default pluginConfig;

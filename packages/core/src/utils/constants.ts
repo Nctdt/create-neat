@@ -39,7 +39,7 @@ export const projectLink: Map<string, string> = getProjectLink(template);
  * 相对于根目录的路径。
  * @constant {string}
  */
-export const relativePathToRoot = "../../../../";
+export const relativePathToRoot = "../../../../../";
 
 /**
  * cn 项目根目录 因为打包进 dist 所以需要多.. 一层

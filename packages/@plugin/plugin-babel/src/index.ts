@@ -1,7 +1,7 @@
-import PluginConfig from "./config/index.js";
+import getConfig from "./config/index.js";
 
-const pluginBabel = (buildTool: string) => {
-  return PluginConfig[buildTool] ?? console.warn(`Unsupported build tool: ${buildTool}`);
+const pluginBabel = (buildTool: string, template: string) => {
+  return getConfig(template)[buildTool] ?? console.warn(`Unsupported build tool: ${buildTool}`);
 };
 
 export default pluginBabel;

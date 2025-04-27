@@ -41,7 +41,7 @@ interface Plugin {
   import: Import;
 }
 
-interface Options {
+export interface Options {
   /** rules配置项 */
   rules: any;
   /** 插件配置 */
@@ -149,8 +149,10 @@ function mergeWebpackConfigAst(options: Options, ast) {
               ]);
             }
             if (rule.use) {
+              // 兼容 use 为对象、字符串或数组的情况
+              const useArr = Array.isArray(rule.use) ? rule.use : [rule.use];
               const parseUseAst = arrayExpression(
-                rule.use.map((item) => {
+                useArr.map((item) => {
                   if (typeof item === "string") {
                     return stringLiteral(item);
                   } else {
