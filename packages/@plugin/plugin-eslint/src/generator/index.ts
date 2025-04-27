@@ -1,6 +1,13 @@
 // plugins/eslint/generator/index.ts
-import { pluginToBuildToolProtocol } from "@src/configs/protocol.js";
 import type GeneratorAPI from "@src/models/GeneratorAPI.js";
+
+const pluginToBuildToolProtocol = {
+  ADD_COMPILER_CONFIG: "ADD_COMPILER_CONFIG",
+  ENTRY_FILE: "ENTRY_FILE",
+  UPDATE_EXPORT_CONTENT_PROTOCOL: "UPDATE_EXPORT_CONTENT_PROTOCOL",
+  INSERT_IMPORT_PROTOCOL: "INSERT_IMPORT_PROTOCOL",
+  SLOT_CONTENT_PROTOCOL: "SLOT_CONTENT_PROTOCOL",
+};
 
 // 通用 ESLint 配置基座
 const baseESLintConfig = {
@@ -62,7 +69,7 @@ const vueDeps = {
   "@babel/eslint-parser": "^7.19.1",
 };
 
-export default (generatorAPI: GeneratorAPI, template: string, buildTool: string) => {
+export default (generatorAPI: GeneratorAPI, template: string) => {
   // 根据模板合并配置
   const eslintConfig = { ...baseESLintConfig };
   let devDependencies = { ...commonDeps };
@@ -86,8 +93,6 @@ export default (generatorAPI: GeneratorAPI, template: string, buildTool: string)
   generatorAPI.protocolGenerate({
     [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
       compiler: "eslint",
-      template,
-      buildTool,
     },
   });
 };
