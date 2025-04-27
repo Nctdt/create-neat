@@ -1,8 +1,14 @@
 import path from "path";
 import fs from "fs";
 import type GeneratorAPI from "@src/models/GeneratorAPI.js";
-import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
 
+const pluginToTemplateProtocol = {
+  PROCESS_STYLE_PLUGIN: "PROCESS_STYLE_PLUGIN",
+  ENTRY_FILE: "ENTRY_FILE",
+  UPDATE_EXPORT_CONTENT_PROTOCOL: "UPDATE_EXPORT_CONTENT_PROTOCOL",
+  INSERT_IMPORT_PROTOCOL: "INSERT_IMPORT_PROTOCOL",
+  SLOT_CONTENT_PROTOCOL: "SLOT_CONTENT_PROTOCOL",
+};
 // ESM 环境下的路径处理
 const __dirname = import.meta.dirname;
 

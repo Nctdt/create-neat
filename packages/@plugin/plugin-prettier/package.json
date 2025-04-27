@@ -2,7 +2,7 @@
   "name": "@laconic/plugin-prettier",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsc"
+    "dev": "tsc -w"
   },
   "dependencies": {}
 }

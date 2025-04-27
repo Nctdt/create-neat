@@ -6,11 +6,7 @@ interface GeneratorAPI {
 }
 
 // 主插件逻辑
-const swcPlugin = (
-  generatorAPI: GeneratorAPI,
-  template: "react" | "vue", // 根据实际模板类型调整
-  buildTool: "webpack" | "vite" | "rollup", // 根据支持的构建工具调整
-) => {
+const swcPlugin = (generatorAPI: GeneratorAPI, template: "react" | "vue") => {
   // 类型安全的配置对象
   const packageConfig = {
     swc: {
@@ -42,7 +38,6 @@ const swcPlugin = (
     [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
       compiler: "swc",
       template,
-      buildTool,
     },
   });
 };

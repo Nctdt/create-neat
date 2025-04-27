@@ -1,8 +1,7 @@
 const protocol = require("../../protocol.js");
 const pluginToBuildToolProtocol = protocol.pluginToBuildToolProtocol;
 
-module.exports = (generatorAPI, template) => {
-  const buildTool = generatorAPI.getBuildTool();
+module.exports = (generatorAPI) => {
   generatorAPI.extendPackage({
     // swc 的文件内容↓
     swc: {
@@ -29,8 +28,6 @@ module.exports = (generatorAPI, template) => {
   generatorAPI.protocolGenerate({
     [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
       compiler: "swc",
-      template,
-      buildTool,
     },
   });
 };
