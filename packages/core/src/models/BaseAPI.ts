@@ -42,7 +42,7 @@ export interface ProtocolProps {
  * @param rootOptions 根目录执行选项
  */
 class BaseAPI {
-  protected generator: Generator;
+  public generator: Generator;
   protected configFilesData: Record<string, ConfigFileData> = {};
   protected packageData = { dependencies: {}, devDependencies: {}, scripts: {} };
   private dependenciesKeys = ["dependencies", "devDependencies"];

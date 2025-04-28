@@ -1,5 +1,3 @@
-import path from "path";
-import fs from "fs";
 import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 const pluginToTemplateProtocol = {
@@ -9,8 +7,6 @@ const pluginToTemplateProtocol = {
   INSERT_IMPORT_PROTOCOL: "INSERT_IMPORT_PROTOCOL",
   SLOT_CONTENT_PROTOCOL: "SLOT_CONTENT_PROTOCOL",
 };
-// ESM 环境下的路径处理
-const __dirname = import.meta.dirname;
 
 export default (generatorAPI: GeneratorAPI) => {
   // 1. 添加 MobX 核心依赖
@@ -55,22 +51,4 @@ export default (generatorAPI: GeneratorAPI) => {
       content: `number = 0; // MobX observable value`,
     },
   });
-
-  // 3. 生成 Store 模板文件
-  const storeTemplate = `import { makeAutoObservable } from 'mobx';
-
-class CounterStore {
-  /* observable-properties */
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  increment() {
-    this.number += 1;
-  }
-}
-
-export const store = new CounterStore();`;
-  fs.writeFileSync(path.join(__dirname, "../../template/src/stores/counter.ts"), storeTemplate);
 };

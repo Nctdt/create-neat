@@ -69,15 +69,16 @@ const vueDeps = {
   "@babel/eslint-parser": "^7.19.1",
 };
 
-export default (generatorAPI: GeneratorAPI, template: string) => {
+export default (generatorAPI: GeneratorAPI) => {
   // 根据模板合并配置
+  const preset = generatorAPI.generator.getPreset();
   const eslintConfig = { ...baseESLintConfig };
   let devDependencies = { ...commonDeps };
 
-  if (template === "react") {
+  if (preset.template === "react") {
     Object.assign(eslintConfig, reactExtensions);
     devDependencies = { ...devDependencies, ...reactDeps };
-  } else if (template === "vue") {
+  } else if (preset.template === "vue") {
     Object.assign(eslintConfig, vueExtensions);
     devDependencies = { ...devDependencies, ...vueDeps };
   }
@@ -93,6 +94,8 @@ export default (generatorAPI: GeneratorAPI, template: string) => {
   generatorAPI.protocolGenerate({
     [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
       compiler: "eslint",
+      template: preset.template,
+      buildTool: preset.buildTool,
     },
   });
 };

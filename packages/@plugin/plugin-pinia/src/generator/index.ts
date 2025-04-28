@@ -1,10 +1,6 @@
 import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
-
 // 如果需要，可以为 generatorAPI 添加类型
-interface GeneratorAPI {
-  extendPackage: (packageConfig: Record<string, any>) => void;
-  protocolGenerate: (protocolConfig: Record<string, any>) => void;
-}
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 export default (generatorAPI: GeneratorAPI) => {
   generatorAPI.extendPackage({

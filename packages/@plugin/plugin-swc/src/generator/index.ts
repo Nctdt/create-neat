@@ -1,20 +1,18 @@
 import { pluginToBuildToolProtocol } from "@src/configs/protocol.js"; // 推荐使用明确类型导出
 // 类型定义
-interface GeneratorAPI {
-  extendPackage: (config: object) => void;
-  protocolGenerate: (config: object) => void;
-}
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 // 主插件逻辑
-const swcPlugin = (generatorAPI: GeneratorAPI, template: "react" | "vue") => {
+const swcPlugin = (generatorAPI: GeneratorAPI) => {
+  const preset = generatorAPI.generator.getPreset();
   // 类型安全的配置对象
   const packageConfig = {
     swc: {
       jsc: {
         parser: {
           syntax: "typescript",
-          tsx: template === "react", // 根据模板自动启用 tsx
-          jsx: template === "react", // 根据模板自动启用 jsx
+          tsx: preset.template === "react", // 根据模板自动启用 tsx
+          jsx: preset.template === "react", // 根据模板自动启用 jsx
         },
         transform: {
           react: {
@@ -37,7 +35,8 @@ const swcPlugin = (generatorAPI: GeneratorAPI, template: "react" | "vue") => {
   generatorAPI.protocolGenerate({
     [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
       compiler: "swc",
-      template,
+      template: preset.template,
+      buildTool: preset.buildTool,
     },
   });
 };

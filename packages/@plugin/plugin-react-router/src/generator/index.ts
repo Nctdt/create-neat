@@ -1,10 +1,6 @@
 // 采用 ES Module 导入方式
 import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
-
-interface GeneratorAPI {
-  extendPackage: (config: object) => void;
-  protocolGenerate: (config: object) => void;
-}
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 const routerPlugin = (generatorAPI: GeneratorAPI) => {
   generatorAPI.extendPackage({

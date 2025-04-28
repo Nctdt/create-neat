@@ -51,10 +51,10 @@ const vueBabelConfig = {
   plugins: ["@vue/babel-plugin-jsx", ...commonBabelPlugins],
 };
 
-const pluginConfig = (generatorAPI, template) => {
+const pluginConfig = (generatorAPI) => {
   let config;
-  const buildTool = generatorAPI.getBuildTool();
-  if (template === "react") {
+  const preset = generatorAPI.generator.getPreset();
+  if (preset.template === "react") {
     config = {
       babel: reactBabelConfig,
       dependencies: commonDependencies,
@@ -63,7 +63,7 @@ const pluginConfig = (generatorAPI, template) => {
         "@babel/preset-react": "^7.24.7",
       },
     };
-  } else if (template === "vue") {
+  } else if (preset.template === "vue") {
     config = {
       babel: vueBabelConfig,
       dependencies: commonDependencies,
@@ -84,8 +84,8 @@ const pluginConfig = (generatorAPI, template) => {
   generatorAPI.protocolGenerate({
     [pluginToBuildToolProtocol.ADD_COMPILER_CONFIG]: {
       compiler: "babel",
-      template,
-      buildTool,
+      template: preset.template,
+      buildTool: preset.buildTool,
     },
   });
 };

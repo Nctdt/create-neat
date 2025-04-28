@@ -1,7 +1,4 @@
-interface GeneratorAPI {
-  extendPackage: (packageConfig: Record<string, any>) => void;
-  protocolGenerate: (protocolConfig: Record<string, any>) => void;
-}
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 // 主函数实现
 const configGenerator = (generatorAPI: GeneratorAPI) => {
