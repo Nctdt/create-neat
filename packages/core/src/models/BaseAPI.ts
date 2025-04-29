@@ -68,6 +68,7 @@ class BaseAPI {
       } else if (protocol in pluginToBuildToolProtocol) {
         api = new PluginToBuildToolAPI(protocols, props, protocol);
       } else if (protocol in templateToBuildToolProtocol) {
+        // new SnapshotableTemplateToBuildToolAPI(protocols, props, protocol);
         api = new TemplateToBuildToolAPI(protocols, props, protocol);
       }
       api.generator();

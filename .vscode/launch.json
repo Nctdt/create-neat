@@ -23,6 +23,102 @@
       "skipFiles": ["<node_internals>/**"],
       "console": "integratedTerminal",
       "type": "node"
+    },
+    // => debug formatCode.test.ts
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug formatCode Tests",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run", 
+        "packages/core/src/__tests__/utils/formatCode.test.ts", 
+        "--reporter=verbose"
+      ],
+      "smartStep": true,
+      "console": "integratedTerminal"
+    },
+    // => debug checkVersion.test.ts
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug checkVersion Tests",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run", 
+        "packages/core/src/__tests__/utils/checkVersion.test.ts", 
+        "--reporter=verbose"
+      ],
+      "smartStep": true,
+      "console": "integratedTerminal"
+    },
+    // => debug createSuccessInfo.test.ts
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug createSuccessInfo Tests",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run", 
+        "packages/core/src/__tests__/utils/createSuccessInfo.test.ts", 
+        "--reporter=verbose"
+      ],
+      "smartStep": true,
+      "console": "integratedTerminal"
+    },
+    // => debug getNpmSource.test.ts
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug getNpmSource Tests",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run", 
+        "packages/core/src/__tests__/utils/getNpmSource.test.ts", 
+        "--reporter=verbose"
+      ],
+      "smartStep": true,
+      "console": "integratedTerminal"
+    },
+    // => debug dependenciesInstall.test.ts
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug dependenciesInstall Tests",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run", 
+        "packages/core/src/__tests__/utils/dependenciesInstall.test.ts", 
+        "--reporter=verbose"
+      ],
+      "smartStep": true,
+      "console": "integratedTerminal"
+    },
+    // => debug commonUtils.test.ts
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug commonUtils Tests",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": [
+        "run", 
+        "packages/core/src/__tests__/utils/commonUtils.test.ts", 
+        "--reporter=verbose"
+      ],
+      "smartStep": true,
+      "console": "integratedTerminal"
     }
   ]
 }

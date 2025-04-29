@@ -22,6 +22,9 @@
     "build": "tsc && npm run copyfile",
     "dev": "npm run copyfile && tsc -w -p ./tsconfig.dev.json",
     "copyfile": "node copyfile.js",
+    "test": "vitest --reporter verbose",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
     "check": "npx tsc"
   },
   "files": [
@@ -64,7 +67,10 @@
     "@types/fs-extra": "^11.0.4",
     "@types/minimist": "^1.2.5",
     "@types/node": "^20.11.22",
-    "@types/tar": "^6.1.11"
+    "@types/tar": "^6.1.11",
+    "@vitest/coverage-v8": "^1.2.1",
+    "@vitest/ui": "^3.0.7",
+    "vitest": "1.2.1"
   },
   "engines": {
     "node": ">=14.0.0",
