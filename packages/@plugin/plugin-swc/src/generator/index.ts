@@ -1,5 +1,4 @@
 import { pluginToBuildToolProtocol } from "@src/configs/protocol.js"; // 推荐使用明确类型导出
-// 类型定义
 import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 // 主插件逻辑

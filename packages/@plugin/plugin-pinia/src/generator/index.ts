@@ -1,5 +1,4 @@
 import { pluginToTemplateProtocol } from "@src/configs/protocol.js";
-// 如果需要，可以为 generatorAPI 添加类型
 import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 
 export default (generatorAPI: GeneratorAPI) => {

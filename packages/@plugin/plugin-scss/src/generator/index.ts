@@ -1,4 +1,7 @@
+import type GeneratorAPI from "@src/models/GeneratorAPI.js";
 import path from "path";
+
+import { pluginToTemplateProtocol } from "../../../../core/dist/src/configs/protocol.js";
 
 interface FileDescribe {
   /** 文件扩展名（如 'js'、'scss'） */
@@ -16,11 +19,6 @@ interface FileData {
   /** 子节点（目录时有效） */
   children?: FileData[];
 }
-interface GeneratorAPI {
-  extendPackage: (config: object) => void;
-  protocolGenerate: (config: object) => void;
-}
-import { pluginToTemplateProtocol } from "../../../../core/dist/src/configs/protocol.js";
 
 // 样式文件类型正则表达式映射
 const StyleReg: Record<string, RegExp> = {

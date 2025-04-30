@@ -26,7 +26,7 @@ const routerPlugin = (generatorAPI: GeneratorAPI) => {
         astOptions: {
           parserOptions: {
             sourceType: "module",
-            plugins: ["typescript", "jsx"] as const, // 使用 const 断言
+            plugins: ["typescript", "jsx"] as const,
           },
         },
       },

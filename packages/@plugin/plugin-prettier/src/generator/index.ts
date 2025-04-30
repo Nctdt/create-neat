@@ -14,9 +14,6 @@ const configGenerator = (generatorAPI: GeneratorAPI) => {
     devDependencies: {
       prettier: "^3.1.0", // 开发依赖版本
     },
-    scripts: {
-      format: 'prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}"', // 格式化脚本
-    },
   });
 };
 

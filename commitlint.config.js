@@ -1,7 +1,6 @@
 // @see: https://cz-git.qbenben.com/zh/guide
 /** @type {import('cz-git').UserConfig} */
 
-// 修改 CommonJS 导出为 ESM 导出
 export default {
   // ignores: [commit => commit.includes("init")],
   extends: ["@commitlint/config-conventional"],

@@ -48,7 +48,7 @@ export default (generatorAPI: GeneratorAPI) => {
     [pluginToTemplateProtocol.SLOT_CONTENT_PROTOCOL]: {
       filePath: "src/stores/counter.ts",
       slotMarker: "/* observable-properties */",
-      content: `number = 0; // MobX observable value`,
+      content: "number = 0; // MobX observable value",
     },
   });
 };

@@ -4,5 +4,6 @@
   "scripts": {
     "dev": "tsc -w"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "type": "module"
 }
